@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, DollarSign, Award, CheckCircle2, Trophy, Smartphone } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 
 interface Transaction {
   id: string;
@@ -63,6 +64,7 @@ const MOCK_TRANSACTIONS: Transaction[] = [
 
 const EarningsHistory: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const { balance } = useUser();
   const itemsPerPage = 8;
   
   const totalPages = Math.ceil(MOCK_TRANSACTIONS.length / itemsPerPage);
@@ -92,7 +94,7 @@ const EarningsHistory: React.FC = () => {
         </div>
         <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-2">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Account Balance</span>
-            <span className="text-xl font-black text-gray-900">$21.99</span>
+            <span className="text-xl font-black text-gray-900">${balance.toFixed(2)}</span>
         </div>
       </div>
 

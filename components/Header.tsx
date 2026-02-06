@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { Bell, User, Search, ArrowUpRight } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 
 const Header: React.FC = () => {
+  const { balance } = useUser();
+
   return (
     <header className="bg-[#0a0a0a] text-white w-full border-b border-gray-800/20">
       <div className="px-6 py-6 flex items-center justify-between">
@@ -11,7 +14,7 @@ const Header: React.FC = () => {
               <div className="flex flex-col">
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1">Wallet Balance</span>
                 <div className="flex items-center space-x-4">
-                  <span className="text-3xl font-black text-white tracking-tighter">$21.99</span>
+                  <span className="text-3xl font-black text-white tracking-tighter">${balance.toFixed(2)}</span>
                   <button className="flex items-center space-x-1.5 px-3 py-1.5 bg-[#c9ff3a] text-black text-[10px] font-black uppercase rounded-lg hover:bg-[#b8eb32] transition-colors shadow-lg shadow-[#c9ff3a]/10">
                     <span>Withdraw</span>
                     <ArrowUpRight size={12} strokeWidth={3} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 
 interface CashOutOption {
   id: string;
@@ -28,11 +29,10 @@ const CASH_OUT_OPTIONS: CashOutOption[] = [
 const WithdrawCash: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<CashOutOption | null>(null);
   
-  // DEBUG STATE: Toggle between a balance below threshold and one above
-  const [isDebugHighBalance, setIsDebugHighBalance] = useState(true);
-
-  const currentBalance = isDebugHighBalance ? 21.99 : 5.50;
-  const withdrawThreshold = 15.00;
+  // Use global user context instead of local state
+  const { balance: currentBalance, isPremium, isFirstCashout } = useUser();
+  
+  const withdrawThreshold = isFirstCashout ? 15.00 : 5.00;
   
   // Calculate progress and amounts
   const progress = Math.min((currentBalance / withdrawThreshold) * 100, 100);
@@ -130,6 +130,7 @@ const WithdrawCash: React.FC = () => {
         </div>
 
         {/* Cashout Bonus Card (Premium) */}
+        {isPremium && (
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-6">
           <div className="flex items-center justify-between">
              <h3 className="text-xl font-black text-gray-900">Cashout Bonus</h3>
@@ -159,6 +160,7 @@ const WithdrawCash: React.FC = () => {
             </div>
           </div>
         </div>
+        )}
       </div>
     );
   }
@@ -170,14 +172,6 @@ const WithdrawCash: React.FC = () => {
       <div className="space-y-6 relative">
         <div className="flex justify-between items-center">
             <h1 className="text-4xl font-black text-gray-900 tracking-tight">Withdraw Cash</h1>
-            {/* Debug Toggle - Hidden from main UI flow but accessible */}
-            <button 
-                onClick={() => setIsDebugHighBalance(!isDebugHighBalance)}
-                className="text-[10px] px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded text-gray-500 font-mono transition-colors"
-                title="Toggle Debug Balance"
-            >
-                DEBUG: {isDebugHighBalance ? 'High ($21.99)' : 'Low ($5.50)'}
-            </button>
         </div>
         
         {/* Progress Card */}
@@ -220,11 +214,13 @@ const WithdrawCash: React.FC = () => {
 
             <div className="pt-2 text-center border-t border-gray-50 mt-4">
               <p className="text-sm font-bold text-gray-900 mt-4">
-                $15.00 Withdraw minimum on your 1st cash out.
+                ${withdrawThreshold.toFixed(2)} Withdraw minimum on your {isFirstCashout ? '1st' : 'next'} cash out.
               </p>
-              <p className="text-xs text-gray-500 font-medium mt-1">
-                Unlock $5.00 Withdraws after your 1st withdraw.
-              </p>
+              {isFirstCashout && (
+                <p className="text-xs text-gray-500 font-medium mt-1">
+                  Unlock $5.00 Withdraws after your 1st withdraw.
+                </p>
+              )}
             </div>
           </div>
         </div>

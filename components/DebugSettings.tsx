@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Settings, LogOut, RefreshCw, DollarSign, Crown, Award } from 'lucide-react';
+import { useUser } from '../context/UserContext';
 
 const DebugSettings: React.FC = () => {
-  const [balance, setBalance] = useState<string>("21.99");
-  const [isPremium, setIsPremium] = useState<boolean>(true);
-  const [isFirstCashout, setIsFirstCashout] = useState<boolean>(true);
+  const { 
+    balance, setBalance, 
+    isPremium, setIsPremium, 
+    isFirstCashout, setIsFirstCashout 
+  } = useUser();
+  
+  const [localBalance, setLocalBalance] = useState<string>(balance.toString());
+
+  useEffect(() => {
+    setLocalBalance(balance.toString());
+  }, [balance]);
 
   const handleBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Allow only numbers and decimal point
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
-      setBalance(value);
+      setLocalBalance(value);
     }
   };
 
   const handleSaveSettings = () => {
-    // In a real app, this would update a global context or store
-    console.log('Settings Saved:', {
-      balance: parseFloat(balance),
-      isPremium,
-      isFirstCashout
-    });
+    setBalance(parseFloat(localBalance) || 0);
     alert('Debug settings applied!');
   };
 
@@ -43,7 +47,7 @@ const DebugSettings: React.FC = () => {
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">$</span>
             <input 
               type="text" 
-              value={balance}
+              value={localBalance}
               onChange={handleBalanceChange}
               className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-lg font-bold rounded-xl py-3 pl-8 pr-4 focus:outline-none focus:ring-2 focus:ring-[#c9ff3a] focus:border-transparent transition-all"
               placeholder="0.00"
