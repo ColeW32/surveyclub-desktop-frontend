@@ -196,7 +196,7 @@ const WithdrawCash: React.FC = () => {
                     </p>
                 </div>
                 <div className="text-right">
-                    <p className="text-3xl font-black text-[#c9ff3a] drop-shadow-sm stroke-black" style={{ WebkitTextStroke: '1px black', textShadow: '2px 2px 0px rgba(0,0,0,0.1)' }}>
+                    <p className="text-3xl font-black text-gray-900">
                         ${currentBalance.toFixed(2)}
                     </p>
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Current Balance</p>
