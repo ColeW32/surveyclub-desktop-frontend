@@ -220,7 +220,7 @@ const WithdrawCash: React.FC = () => {
 
             <div className="pt-2 text-center border-t border-gray-50 mt-4">
               <p className="text-sm font-bold text-gray-900 mt-4">
-                Withdraw minimum on your 1st cash out.
+                $15.00 Withdraw minimum on your 1st cash out.
               </p>
               <p className="text-xs text-gray-500 font-medium mt-1">
                 Unlock $5.00 Withdraws after your 1st withdraw.
