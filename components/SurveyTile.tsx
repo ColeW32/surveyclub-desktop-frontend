@@ -10,8 +10,8 @@ const SurveyTile: React.FC<SurveyTileProps> = ({ survey }) => {
   return (
     <div className="flex-shrink-0 w-[260px] bg-white rounded-[1.5rem] border border-gray-100 flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer overflow-hidden">
       {/* Top Accent/Badge Area */}
-      <div className="px-5 pt-4 flex justify-between items-start">
-        <div className="flex flex-wrap gap-1.5">
+      <div className="px-5 pt-4 flex justify-center items-center min-h-[28px]">
+        <div className="flex flex-wrap gap-1.5 justify-center">
           {survey.isHot && (
             <div className="flex items-center space-x-1 bg-red-50 text-red-600 text-[9px] font-black px-1.5 py-0.5 rounded-md uppercase tracking-wider border border-red-100">
               <Flame size={9} className="fill-red-600" />
@@ -29,12 +29,6 @@ const SurveyTile: React.FC<SurveyTileProps> = ({ survey }) => {
               <span>Quick</span>
             </div>
           )}
-        </div>
-        
-        {/* User Count */}
-        <div className="flex items-center space-x-1 text-gray-400 group-hover:text-[#c9ff3a] transition-colors">
-          <Users size={12} />
-          <span className="text-[9px] font-bold">{survey.userCount}</span>
         </div>
       </div>
 
@@ -55,18 +49,25 @@ const SurveyTile: React.FC<SurveyTileProps> = ({ survey }) => {
 
       {/* Compact Stats Footer */}
       <div className="px-4 pb-4">
-        <div className="flex items-center justify-between bg-gray-50/80 rounded-xl p-3 border border-gray-100">
-          <div className="flex flex-col items-center flex-1 border-r border-gray-200/50">
+        <div className="grid grid-cols-3 bg-gray-50/80 rounded-xl p-3 border border-gray-100 divide-x divide-gray-200/50">
+          <div className="flex flex-col items-center justify-center">
             <div className="flex items-center space-x-1.5 text-gray-900 font-black text-xs">
               <Timer size={14} className="text-gray-400" strokeWidth={2.5} />
               <span>{survey.time}</span>
             </div>
           </div>
           
-          <div className="flex flex-col items-center flex-1">
+          <div className="flex flex-col items-center justify-center">
              <div className="flex items-center space-x-1.5 text-gray-900 font-black text-xs">
               <Star size={14} className="text-yellow-400 fill-yellow-400" />
               <span>{survey.rating}</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center justify-center">
+             <div className="flex items-center space-x-1.5 text-gray-900 font-black text-xs">
+              <Users size={14} className="text-gray-400" />
+              <span>{survey.userCount}</span>
             </div>
           </div>
         </div>
