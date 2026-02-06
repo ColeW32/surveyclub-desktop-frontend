@@ -214,7 +214,7 @@ const WithdrawCash: React.FC = () => {
                 
                 <div className="flex justify-between items-center text-sm font-bold">
                     <span className="text-gray-400">$0.00</span>
-                    <span className={canCashOut ? 'text-[#c9ff3a]' : 'text-gray-900'}>${withdrawThreshold.toFixed(2)} Goal</span>
+                    <span className="text-gray-900">${withdrawThreshold.toFixed(2)} Goal</span>
                 </div>
             </div>
 
