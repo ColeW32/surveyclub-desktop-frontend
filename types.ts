@@ -6,7 +6,8 @@ export enum NavItem {
   Offers = 'Offers',
   Games = 'Games',
   History = 'History',
-  Withdraw = 'Withdraw'
+  Withdraw = 'Withdraw',
+  Debug = 'Debug'
 }
 
 export interface Offer {

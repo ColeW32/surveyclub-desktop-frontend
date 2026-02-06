@@ -7,7 +7,8 @@ import {
   History, 
   Tag,
   Zap,
-  PlayCircle
+  PlayCircle,
+  Settings
 } from 'lucide-react';
 import { NavItem, Survey } from './types';
 
@@ -28,6 +29,7 @@ export const NAVIGATION_ITEMS = [
   { id: NavItem.MyGames, label: 'My Games', icon: <PlayCircle size={20} /> },
   { id: NavItem.History, label: 'Earning History', icon: <History size={20} /> },
   { id: NavItem.Withdraw, label: 'Withdraw Cash', icon: <Wallet size={20} /> },
+  { id: NavItem.Debug, label: 'Debug Settings', icon: <Settings size={20} /> },
 ];
 
 export const MOCK_OFFERS = [
