@@ -1,0 +1,9 @@
+
+{
+  "name": "SurveyClub Desktop",
+  "description": "A high-end, desktop-first earning platform for taking surveys and completing offers, matching the sleek Abstrakt layout and SurveyClub brand identity.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
