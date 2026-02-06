@@ -28,14 +28,18 @@ const CASH_OUT_OPTIONS: CashOutOption[] = [
 const WithdrawCash: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<CashOutOption | null>(null);
   
-  const currentBalance = 21.99;
-  const withdrawThreshold = 15.00;
-  const progress = Math.min((currentBalance / withdrawThreshold) * 100, 100);
+  // DEBUG STATE: Toggle between a balance below threshold and one above
+  const [isDebugHighBalance, setIsDebugHighBalance] = useState(true);
 
-  // Derived state for the detail view
-  // Screenshot shows $21.00 ready to cash out from $21.99
+  const currentBalance = isDebugHighBalance ? 21.99 : 5.50;
+  const withdrawThreshold = 15.00;
+  
+  // Calculate progress and amounts
+  const progress = Math.min((currentBalance / withdrawThreshold) * 100, 100);
+  const canCashOut = currentBalance >= withdrawThreshold;
   const cashOutAmount = Math.floor(currentBalance); 
   const remainingBalance = (currentBalance - cashOutAmount).toFixed(2);
+  const amountNeeded = (withdrawThreshold - currentBalance).toFixed(2);
 
   if (selectedOption) {
     return (
@@ -163,30 +167,62 @@ const WithdrawCash: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto space-y-12">
       {/* Header Section */}
-      <div className="space-y-6">
-        <h1 className="text-4xl font-black text-gray-900 tracking-tight">Withdraw Cash</h1>
+      <div className="space-y-6 relative">
+        <div className="flex justify-between items-center">
+            <h1 className="text-4xl font-black text-gray-900 tracking-tight">Withdraw Cash</h1>
+            {/* Debug Toggle - Hidden from main UI flow but accessible */}
+            <button 
+                onClick={() => setIsDebugHighBalance(!isDebugHighBalance)}
+                className="text-[10px] px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded text-gray-500 font-mono transition-colors"
+                title="Toggle Debug Balance"
+            >
+                DEBUG: {isDebugHighBalance ? 'High ($21.99)' : 'Low ($5.50)'}
+            </button>
+        </div>
         
         {/* Progress Card */}
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-          <div className="space-y-4">
+          <div className="space-y-6">
+             <div className="flex justify-between items-end">
+                <div>
+                    <h2 className="text-2xl font-black text-gray-900">
+                        {canCashOut ? 'Ready to Withdraw!' : 'Keep Earning!'}
+                    </h2>
+                    <p className="text-gray-500 font-medium mt-1">
+                        {canCashOut 
+                            ? `You have $${cashOutAmount.toFixed(2)} available to cash out now.`
+                            : `You need $${amountNeeded} more to reach your first withdrawal.`
+                        }
+                    </p>
+                </div>
+                <div className="text-right">
+                    <p className="text-3xl font-black text-[#c9ff3a] drop-shadow-sm stroke-black" style={{ WebkitTextStroke: '1px black', textShadow: '2px 2px 0px rgba(0,0,0,0.1)' }}>
+                        ${currentBalance.toFixed(2)}
+                    </p>
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Current Balance</p>
+                </div>
+             </div>
+
             {/* Progress Bar */}
-            <div className="relative h-6 bg-gray-100 rounded-full overflow-hidden">
-              <div 
-                className="absolute top-0 left-0 h-full bg-[#c9ff3a]" 
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            
-            <div className="flex justify-between items-center text-sm font-bold">
-              <span className="text-gray-400">$0.00</span>
-              <span className="text-black">${withdrawThreshold.toFixed(2)}</span>
+            <div className="space-y-2">
+                <div className="relative h-6 bg-gray-100 rounded-full overflow-hidden">
+                <div 
+                    className={`absolute top-0 left-0 h-full transition-all duration-1000 ease-out ${canCashOut ? 'bg-[#c9ff3a]' : 'bg-yellow-400'}`}
+                    style={{ width: `${progress}%` }}
+                ></div>
+                </div>
+                
+                <div className="flex justify-between items-center text-sm font-bold">
+                    <span className="text-gray-400">$0.00</span>
+                    <span className={canCashOut ? 'text-[#c9ff3a]' : 'text-gray-900'}>${withdrawThreshold.toFixed(2)} Goal</span>
+                </div>
             </div>
 
-            <div className="pt-2 text-center">
-              <p className="text-lg font-bold text-gray-900">
+            <div className="pt-2 text-center border-t border-gray-50 mt-4">
+              <p className="text-sm font-bold text-gray-900 mt-4">
                 Withdraw minimum on your 1st cash out.
               </p>
-              <p className="text-gray-500 font-medium mt-1">
+              <p className="text-xs text-gray-500 font-medium mt-1">
                 Unlock $5.00 Withdraws after your 1st withdraw.
               </p>
             </div>
