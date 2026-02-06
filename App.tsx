@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
@@ -10,6 +10,14 @@ import { NavItem } from './types';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavItem>(NavItem.EarnCash);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll position when tab changes
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [activeTab]);
 
   return (
     <div className="flex h-screen bg-[#0a0a0a] text-white overflow-hidden">
@@ -22,7 +30,10 @@ const App: React.FC = () => {
 
         {/* Content Canvas (The "Inner Section") */}
         <main className="flex-1 px-6 pb-6 min-h-0">
-          <div className="bg-[#f8f9fa] rounded-[1.5rem] w-full h-full overflow-y-auto no-scrollbar p-12 lg:p-16 scroll-smooth shadow-inner">
+          <div 
+            ref={scrollContainerRef}
+            className="bg-[#f8f9fa] rounded-[1.5rem] w-full h-full overflow-y-auto no-scrollbar p-12 lg:p-16 scroll-smooth shadow-inner"
+          >
             {activeTab === NavItem.EarnCash && <Dashboard />}
             {activeTab === NavItem.MyGames && <MyGames />}
             {activeTab === NavItem.Withdraw && <WithdrawCash />}
