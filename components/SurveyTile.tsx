@@ -11,7 +11,7 @@ const SurveyTile: React.FC<SurveyTileProps> = ({ survey }) => {
   return (
     <div className="flex-shrink-0 w-[290px] bg-white rounded-[2rem] border border-gray-100 flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer overflow-hidden">
       {/* Top Accent/Badge Area */}
-      <div className="px-6 pt-5 flex justify-between items-start h-16">
+      <div className="px-6 pt-5 flex justify-between items-start">
         <div className="flex flex-wrap gap-2">
           {survey.isHot && (
             <div className="flex items-center space-x-1 bg-red-50 text-red-600 text-[9px] font-black px-2 py-1 rounded-lg uppercase tracking-wider border border-red-100">
@@ -32,31 +32,24 @@ const SurveyTile: React.FC<SurveyTileProps> = ({ survey }) => {
           )}
         </div>
         
-        {/* Pinned Metadata Top Right */}
-        <div className="text-right flex flex-col items-end">
-          <div className="flex items-center space-x-1.5 text-gray-400 group-hover:text-[#c9ff3a] transition-colors mb-0.5">
-            <Users size={14} />
-            <span className="text-[10px] font-bold">{survey.userCount}</span>
-          </div>
-          <span className="text-[9px] font-black text-gray-300 uppercase tracking-widest">{survey.provider}</span>
+        {/* User Count Only - Provider Removed */}
+        <div className="flex items-center space-x-1.5 text-gray-400 group-hover:text-[#c9ff3a] transition-colors">
+          <Users size={14} />
+          <span className="text-[10px] font-bold">{survey.userCount}</span>
         </div>
       </div>
 
-      {/* Title & Reward Section */}
-      <div className="px-8 pb-4 pt-1 flex flex-col items-center text-center space-y-3">
-        <h3 className="text-sm font-black text-gray-800 tracking-tight leading-tight px-4 h-8 flex items-center justify-center">
-          {survey.title}
-        </h3>
-        
+      {/* Reward Section - Title Removed */}
+      <div className="px-8 py-6 flex flex-col items-center text-center space-y-1">
         <div className="flex items-center justify-center space-x-3">
           {survey.originalAmount && (
-            <span className="text-base text-gray-300 line-through font-bold mt-1">
+            <span className="text-base text-gray-300 line-through font-bold mt-2">
               ${survey.originalAmount.toFixed(2)}
             </span>
           )}
           <div className="flex items-baseline">
-            <span className="text-xl font-black text-gray-900 mr-1">$</span>
-            <span className="text-4xl font-black text-gray-900 tracking-tighter">
+            <span className="text-2xl font-black text-gray-900 mr-1">$</span>
+            <span className="text-5xl font-black text-gray-900 tracking-tighter">
               {survey.amount.toFixed(2)}
             </span>
           </div>
