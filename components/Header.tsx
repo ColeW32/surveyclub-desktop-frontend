@@ -5,9 +5,7 @@ import { Bell, User, Search, ArrowUpRight } from 'lucide-react';
 const Header: React.FC = () => {
   return (
     <header className="bg-[#0a0a0a] text-white w-full border-b border-gray-800/20">
-      <div className="px-6">
-        <div className="px-12 lg:px-16">
-          <div className="max-w-6xl mx-auto py-6 flex items-center justify-between">
+      <div className="px-6 py-6 flex items-center justify-between">
             {/* Left Portion: Balance & Withdraw */}
             <div className="flex items-center">
               <div className="flex flex-col">
@@ -46,8 +44,6 @@ const Header: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </header>
   );
