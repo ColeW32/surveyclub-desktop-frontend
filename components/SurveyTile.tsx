@@ -8,7 +8,7 @@ interface SurveyTileProps {
 
 const SurveyTile: React.FC<SurveyTileProps> = ({ survey }) => {
   return (
-    <div className="flex-shrink-0 w-[260px] bg-white rounded-[1.5rem] border border-gray-100 flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer overflow-hidden">
+    <div className="bg-white rounded-[1.5rem] border border-gray-100 flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer overflow-hidden h-full">
       {/* Top Accent/Badge Area */}
       <div className="px-5 pt-4 flex justify-center items-center min-h-[28px]">
         <div className="flex flex-wrap gap-1.5 justify-center">
