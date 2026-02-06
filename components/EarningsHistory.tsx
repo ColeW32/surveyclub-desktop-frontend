@@ -91,8 +91,8 @@ const EarningsHistory: React.FC = () => {
           <p className="text-gray-500 font-medium mt-2">Review your transactions and earnings</p>
         </div>
         <div className="bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100 flex items-center space-x-2">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Earned</span>
-            <span className="text-xl font-black text-[#c9ff3a]" style={{ WebkitTextStroke: '1px black' }}>$21.99</span>
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Account Balance</span>
+            <span className="text-xl font-black text-gray-900">$21.99</span>
         </div>
       </div>
 
