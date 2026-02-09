@@ -6,7 +6,8 @@ const DebugSettings: React.FC = () => {
   const { 
     balance, setBalance, 
     isPremium, setIsPremium, 
-    isFirstCashout, setIsFirstCashout 
+    isFirstCashout, setIsFirstCashout,
+    setIsAuthenticated
   } = useUser();
   
   const [localBalance, setLocalBalance] = useState<string>(balance.toString());
@@ -122,7 +123,9 @@ const DebugSettings: React.FC = () => {
              <span>Apply Changes</span>
            </button>
 
-           <button className="w-full py-4 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-2xl transition-colors flex items-center justify-center space-x-2 border border-red-100">
+           <button 
+             onClick={() => setIsAuthenticated(false)}
+             className="w-full py-4 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-2xl transition-colors flex items-center justify-center space-x-2 border border-red-100">
              <LogOut size={18} />
              <span>Sign Out</span>
            </button>

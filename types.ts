@@ -41,3 +41,10 @@ export interface UserStats {
   surveysCompleted: number;
   activeOffers: number;
 }
+
+export interface AppUser {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  isDebug: boolean;
+}

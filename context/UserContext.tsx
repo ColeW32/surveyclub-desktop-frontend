@@ -7,6 +7,8 @@ interface UserContextType {
   setIsPremium: (isPremium: boolean) => void;
   isFirstCashout: boolean;
   setIsFirstCashout: (isFirstCashout: boolean) => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -15,6 +17,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [balance, setBalance] = useState<number>(21.99);
   const [isPremium, setIsPremium] = useState<boolean>(true);
   const [isFirstCashout, setIsFirstCashout] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
   return (
     <UserContext.Provider value={{
@@ -23,7 +26,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       isPremium,
       setIsPremium,
       isFirstCashout,
-      setIsFirstCashout
+      setIsFirstCashout,
+      isAuthenticated,
+      setIsAuthenticated
     }}>
       {children}
     </UserContext.Provider>
