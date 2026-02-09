@@ -24,8 +24,8 @@ const LoginScreen: React.FC = () => {
     <div className="flex h-screen bg-[#0a0a0a] text-white overflow-hidden relative selection:bg-[#c9ff3a] selection:text-black">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#c9ff3a] rounded-full blur-[120px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[150px] opacity-10 animate-pulse delay-1000"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#c9ff3a] rounded-full blur-[120px] opacity-20 animate-pulse" style={{ animationDuration: '10s' }}></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600 rounded-full blur-[150px] opacity-10 animate-pulse delay-1000" style={{ animationDuration: '12s' }}></div>
       </div>
 
       <div className="flex-1 flex items-center justify-center relative z-10">
