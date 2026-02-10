@@ -32,12 +32,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
   const [hasCompletedWelcomeSurvey, setHasCompletedWelcomeSurvey] = useState<boolean>(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
+  const [showPremiumModal, setShowPremiumModal] = useState<boolean>(false);
 
   const signOut = useCallback(() => {
     setIsAuthenticated(false);
     setHasCompletedOnboarding(false);
     setHasCompletedWelcomeSurvey(false);
     setShowWelcomeModal(false);
+    setShowPremiumModal(false);
     setBalance(21.99);
     setIsPremium(true);
     setIsFirstCashout(true);
@@ -48,6 +50,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setHasCompletedOnboarding(false);
     setHasCompletedWelcomeSurvey(false);
     setShowWelcomeModal(false);
+    setShowPremiumModal(false);
     setBalance(0);
   }, []);
 
@@ -56,6 +59,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setHasCompletedOnboarding(true);
     setHasCompletedWelcomeSurvey(true);
     setShowWelcomeModal(false);
+    setShowPremiumModal(false);
     setBalance(21.99);
   }, []);
 
