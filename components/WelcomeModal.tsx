@@ -26,7 +26,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onStartSurvey, onClose }) =
         <div className="text-center mb-6">
           <p className="text-lg font-medium text-[#25272B]">Welcome to</p>
           <h2 className="text-3xl sm:text-[28px] font-bold text-[#25272B] mt-4 mb-3">SurveyClub</h2>
-          <p className="text-[15px] text-[#6B7280] leading-relaxed">
+          <p className="text-[15px] text-[#6B7280] leading-relaxed px-4">
             You now have unfiltered access to surveys and games where we pay you 3x more than any other survey platform.
           </p>
         </div>
@@ -42,12 +42,12 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onStartSurvey, onClose }) =
         </p>
 
         {/* Checklist */}
-        <div className="border border-[#E5E5E6] rounded-xl p-4 mb-6">
-          {/* Welcome Survey row - selected */}
-          <div className="flex items-center py-3 px-3 rounded-lg bg-[#E5F9F5] border-t-2 border-b-2 border-[#00BE9D]">
+        <div className="border border-[#E5E5E6] rounded-xl mb-6 overflow-hidden">
+          {/* Welcome Survey row - pending */}
+          <div className="flex items-center py-3 px-4 bg-white">
             <div className="mr-3 flex-shrink-0">
-              <div className="w-5 h-5 rounded-full border-2 border-[#00BE9D] bg-[#00BE9D] flex items-center justify-center">
-                <CheckCircle size={12} className="text-white" />
+              <div className="w-5 h-5 rounded-full border-2 border-[#D1D5DB] flex items-center justify-center">
+                {/* Empty circle for pending state */}
               </div>
             </div>
             <span className="text-base font-medium text-[#25272B] flex-1">Welcome Survey</span>
@@ -55,10 +55,10 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ onStartSurvey, onClose }) =
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-[#F3F4F6] my-1" />
+          <div className="h-px bg-[#F3F4F6]" />
 
           {/* Check-In row - locked */}
-          <div className="flex items-center py-3 px-3 rounded-lg opacity-50">
+          <div className="flex items-center py-3 px-4 bg-white opacity-50">
             <div className="mr-3 flex-shrink-0">
               <div className="w-5 h-5 rounded-full border-2 border-[#D1D5DB] flex items-center justify-center">
                 <Lock size={10} className="text-gray-400" />

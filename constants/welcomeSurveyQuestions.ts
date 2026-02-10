@@ -4,7 +4,7 @@ export interface SurveyOption {
 }
 
 export interface WelcomeSurveyQuestion {
-  type: 'select' | 'year' | 'postal';
+  type: 'select' | 'year' | 'text';
   question: string;
   title?: string;
   category?: string;
@@ -39,7 +39,7 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
     title: "You're joining a community over 50,000 Survey Club Members who are earned over $10m in cash outs.",
     options: ['Broccoli', 'Apple', 'Banana', 'Strawberry'],
     correctAnswer: 'Broccoli',
-    explanation: "That's right! Survey Club pays out over 3.1x more on average vs. other apps. If you earn $10 in another app, you would have made $31 in Survey Club",
+    explanation: "That's right! Survey Clubs pays out over 3.1x more on average vs. other apps. If you earn $10 in another app, you would have made $31 in Survey Club",
   },
   {
     type: 'select',
@@ -47,13 +47,11 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
     title: 'Your opinions matters and helps thousands of brands make the right decisions.',
     options: ['I will be honest'],
     correctAnswer: 'I will be honest',
-    explanation: "That's right! Survey Club pays out over 3x more on average vs. other apps.",
+    explanation: "That's right! Survey Clubs pays out over 3x more on average vs. other apps.",
   },
   {
     type: 'select',
-    id: 'welcome_attribution_v1',
     question: 'How did you hear about Survey Club?',
-    isAttribution: true,
     options: [
       'Found on App Store',
       'Friend/Family Referred Me',
@@ -66,7 +64,7 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
       'Google Search',
     ],
     correctAnswer: null,
-    explanation: "That's right! Survey Club pays out over 3x more on average vs. other apps.",
+    explanation: "That's right! Survey Clubs pays out over 3x more on average vs. other apps.",
   },
   {
     type: 'select',
@@ -84,7 +82,7 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
   {
     type: 'select',
     qualificationCode: '211',
-    question: "I'm a",
+    question: "I'm a ",
     category: 'Gender',
     options: [
       { id: '111', value: 'Male' },
@@ -95,21 +93,21 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
   {
     type: 'year',
     qualificationCode: '212',
-    question: 'I was born in',
+    question: 'I was born in ',
     category: 'Age',
     minYear: 1940,
     maxYear: currentYear - 15,
   },
   {
-    type: 'postal',
+    type: 'text',
     qualificationCode: '229',
-    question: 'My postal code is',
+    question: 'My Zipcode is ',
     category: 'Location',
   },
   {
     type: 'select',
     qualificationCode: '215',
-    question: "I'm employed",
+    question: "I'm employed ",
     category: 'Employment',
     options: [
       { id: '114', value: 'Full Time' },
@@ -122,7 +120,7 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
   {
     type: 'select',
     qualificationCode: '217',
-    question: 'I am',
+    question: 'I am ',
     category: 'Household Relationship',
     options: [
       { id: '111', value: 'Single' },
@@ -136,7 +134,7 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
   {
     type: 'select',
     qualificationCode: '214',
-    question: 'My ethnic background is',
+    question: 'My ethnic background is ',
     category: 'Race',
     options: [
       { id: '111', value: 'White' },
@@ -154,13 +152,13 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
     question: 'My household earns approximately per year',
     category: 'Income',
     options: [
-      { id: '111', value: 'Under $25,000' },
-      { id: '112', value: '$25,000 - $49,999' },
-      { id: '113', value: '$50,000 - $74,999' },
-      { id: '114', value: '$75,000 - $99,999' },
-      { id: '115', value: '$100,000 - $149,999' },
-      { id: '116', value: '$150,000 or more' },
-      { id: '117', value: 'Prefer not to say' },
+      { id: '111', value: ' Under $25,000' },
+      { id: '112', value: ' $25,000 - $49,999' },
+      { id: '113', value: ' $50,000 - $74,999' },
+      { id: '114', value: ' $75,000 - $99,999' },
+      { id: '115', value: ' $100,000 - $149,999' },
+      { id: '116', value: ' $150,000 or more' },
+      { id: '117', value: ' Prefer not to say' },
     ],
   },
 ];

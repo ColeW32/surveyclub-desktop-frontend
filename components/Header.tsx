@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
-  const { balance } = useUser();
+  const { balance, isPremium } = useUser();
 
   return (
     <header className="bg-[#0a0a0a] text-white w-full border-b border-gray-800/20">
@@ -48,7 +48,11 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               <div className="flex items-center space-x-3 group cursor-pointer pl-3 pr-2 py-1 rounded-xl hover:bg-white/5 transition-all">
                 <div className="text-right hidden sm:block">
                   <p className="text-xs font-black text-white group-hover:text-[#c9ff3a] transition-colors leading-none mb-0.5">Jonathan S.</p>
-                  <p className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none">Platinum</p>
+                  {isPremium ? (
+                    <p className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none">Premium</p>
+                  ) : (
+                    <button className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none underline hover:text-white transition-colors">Free Plan</button>
+                  )}
                 </div>
                 <div className="w-9 h-9 rounded-xl bg-gray-800 flex items-center justify-center border border-gray-700 overflow-hidden group-hover:border-[#c9ff3a]/50 transition-colors">
                   <User size={16} className="text-gray-400 group-hover:text-white" />
