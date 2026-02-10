@@ -8,9 +8,14 @@ if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+try {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} catch (error) {
+  console.error("Failed to render app:", error);
+  document.body.innerHTML = `<div style="color: white; padding: 20px;"><h1>Application Error</h1><pre>${String(error)}</pre></div>`;
+}
