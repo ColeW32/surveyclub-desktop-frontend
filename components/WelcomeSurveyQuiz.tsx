@@ -112,18 +112,31 @@ const WelcomeSurveyQuiz: React.FC = () => {
   // Completion screen
   if (showCompletion) {
     return (
-      <div className="flex flex-col h-screen bg-[#F6F7F8] items-center justify-center px-4">
-        <div className="w-full max-w-md text-center">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#00BE9D] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#00BE9D]/30">
-            <Award size={36} className="text-white" />
+      <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white relative overflow-hidden items-center justify-center px-4">
+        {/* Background decoration */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <div className="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[100px]" />
+          <div className="absolute bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px]" />
+          {/* Confetti-like dots */}
+          <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-yellow-400/30 animate-pulse" />
+          <div className="absolute top-1/3 right-1/4 w-4 h-4 rounded-full bg-purple-400/30 animate-pulse delay-700" />
+          <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-pink-400/30 animate-pulse delay-300" />
+        </div>
+
+        <div className="relative z-10 w-full max-w-md text-center animate-in zoom-in-50 duration-500">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-tr from-[#00BE9D] to-[#00D4AF] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-[#00BE9D]/30 ring-4 ring-white">
+            <Award size={48} className="text-white" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] mb-3">Survey Complete!</h2>
-          <p className="text-base sm:text-lg text-[#6B7280] mb-2">You earned</p>
-          <p className="text-4xl sm:text-5xl font-black text-[#00BE9D] mb-6">$0.25</p>
-          <p className="text-sm text-[#6B7280] mb-8">Your balance has been updated. Let's start earning more!</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-[#111827] mb-4 tracking-tight">Survey Complete!</h2>
+          <p className="text-lg sm:text-xl text-gray-500 font-medium mb-2">You just earned</p>
+          <div className="relative inline-block mb-8">
+            <p className="text-6xl sm:text-7xl font-black text-[#00BE9D] tracking-tighter">$0.25</p>
+            <div className="absolute -top-2 -right-6 text-2xl animate-bounce">🎉</div>
+          </div>
+          <p className="text-base text-gray-500 mb-10 max-w-xs mx-auto leading-relaxed">Your balance has been updated. Let's start earning more!</p>
           <button
             onClick={handleComplete}
-            className="w-full bg-[#111827] text-white font-semibold text-base py-4 rounded-2xl hover:bg-[#1f2937] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-[#111827]/20"
+            className="w-full bg-[#111827] hover:bg-black text-white font-bold text-lg py-5 rounded-2xl shadow-xl shadow-[#111827]/20 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-gray-800"
           >
             Start Earning
           </button>
@@ -133,10 +146,17 @@ const WelcomeSurveyQuiz: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white">
+    <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[10%] -left-[10%] w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[10%] -right-[10%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px]" />
+      </div>
+
       {/* Header */}
-      <header className="px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-2">
-        <div className="flex items-center gap-4 mb-2">
+      <header className="relative z-10 px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4">
+        <div className="max-w-3xl mx-auto w-full">
+          <div className="flex items-center gap-4 mb-6">
           {currentIndex > 0 ? (
             <button
               onClick={goBack}
@@ -149,35 +169,44 @@ const WelcomeSurveyQuiz: React.FC = () => {
             <div className="w-16" />
           )}
         </div>
-        {/* Welcome Survey title */}
-        <p className="text-base font-bold text-[#25272B] mb-2.5">Welcome Survey</p>
-        {/* Progress bar - 3px height, #CDCDCE background matching mobile */}
-        <div className="h-[3px] bg-[#CDCDCE] rounded-[5px] overflow-hidden">
+        
+        <div className="flex justify-between items-center mb-4">
+          <p className="text-xl font-bold text-[#111827]">Welcome Survey</p>
+          <span className="text-sm font-semibold text-[#00BE9D] bg-[#00BE9D]/10 px-3 py-1 rounded-full">
+            {Math.round(progress * 100)}%
+          </span>
+        </div>
+
+        {/* Progress bar */}
+        <div className="h-3 bg-gray-200 rounded-full overflow-hidden shadow-inner">
           <div
-            className="h-full bg-[#00BE9D] transition-all duration-300"
+            className="h-full bg-gradient-to-r from-[#00BE9D] to-[#00D4AF] transition-all duration-500 ease-out shadow-[0_0_10px_rgba(0,190,157,0.3)]"
             style={{ width: `${progress * 100}%` }}
           />
         </div>
-      </header>
+      </div>
+    </header>
 
       {/* Content */}
-      <div className="flex-1 flex items-start justify-center overflow-y-auto px-4 sm:px-6 py-6 sm:py-4">
-        <div className={`w-full max-w-lg transition-opacity duration-200 ${fadeClass}`}>
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-start overflow-y-auto px-4 sm:px-6 py-6 sm:py-8 w-full max-w-3xl mx-auto">
+        <div className={`w-full max-w-xl transition-all duration-500 ease-out transform ${
+          fadeClass === 'opacity-100' ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+        }`}>
           {/* Title text (shown on first few questions) */}
           {question.title && (
-            <p className="text-sm text-[#111827] font-normal mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-500 font-medium mb-8 leading-relaxed text-center">
               {question.title}
             </p>
           )}
 
           {/* Question text - appends selected value for qualification questions */}
-          <h2 className="text-base font-medium text-[#111827] mb-6 leading-snug">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#111827] mb-8 leading-tight text-center">
             {getDisplayQuestion()}
           </h2>
 
           {/* Select options */}
           {question.type === 'select' && question.options && (
-            <div className="space-y-2.5">
+            <div className="space-y-3 w-full">
               {question.options.map((opt, idx) => {
                 const label = getOptionLabel(opt);
                 const isSelected = selectedOption === label;
@@ -188,35 +217,34 @@ const WelcomeSurveyQuiz: React.FC = () => {
                   <button
                     key={idx}
                     onClick={() => handleOptionSelect(label)}
-                    className={`w-full text-left px-4 py-3.5 rounded-lg border font-normal text-sm transition-all duration-200 flex items-center gap-2.5 ${
+                    className={`w-full text-left px-6 py-5 rounded-xl border-2 font-medium text-base transition-all duration-200 flex items-center gap-4 group ${
                       isOptionCorrect
-                        ? 'border-[#4CAF50]'
+                        ? 'border-[#4CAF50] bg-green-50 shadow-md shadow-green-100'
                         : isOptionIncorrect
-                          ? 'border-[#F44336]'
+                          ? 'border-[#F44336] bg-red-50 shadow-md shadow-red-100'
                           : isSelected && !hasCorrectAnswer
-                            ? 'bg-[#F2F2F2] border-[#00BE9D]'
-                            : 'border-[#E5E5E6] bg-white hover:bg-gray-50'
+                            ? 'bg-white border-[#00BE9D] shadow-lg shadow-[#00BE9D]/10 translate-x-1'
+                            : 'border-transparent bg-white shadow-sm hover:shadow-md hover:bg-gray-50 hover:border-gray-200'
                     }`}
                   >
                     {/* Radio button */}
-                    <div className={`w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 ${
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
                       isOptionCorrect
-                        ? 'border-[#00BE9D]'
+                        ? 'border-[#4CAF50] bg-[#4CAF50]'
                         : isOptionIncorrect
-                          ? 'border-[#F44336]'
-                          : 'border-[#00BE9D]'
+                          ? 'border-[#F44336] bg-[#F44336]'
+                          : isSelected
+                            ? 'border-[#00BE9D]'
+                            : 'border-gray-300 group-hover:border-gray-400'
                     }`}>
                       {isSelected && (
-                        <div className={`w-2.5 h-2.5 rounded-full ${
-                          isOptionCorrect
-                            ? 'bg-[#00BE9D]'
-                            : isOptionIncorrect
-                              ? 'bg-[#F44336]'
-                              : 'bg-[#00BE9D]'
-                        }`} />
+                        <div className={`w-2.5 h-2.5 rounded-full bg-white`} />
+                      )}
+                      {(isOptionCorrect || isOptionIncorrect) && (
+                        <div className="w-2.5 h-2.5 rounded-full bg-white" />
                       )}
                     </div>
-                    <span className="ml-1">{label}</span>
+                    <span className={`text-lg ${isSelected ? 'text-[#111827] font-bold' : 'text-gray-600'}`}>{label}</span>
                   </button>
                 );
               })}
@@ -287,14 +315,14 @@ const WelcomeSurveyQuiz: React.FC = () => {
       </div>
 
       {/* Bottom button - "Continue" or "Complete" matching mobile */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-3 pb-6 sm:pb-8">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 pt-3 pb-8 sm:pb-10">
         <button
           onClick={goNext}
           disabled={!canProceed}
-          className={`w-full max-w-lg mx-auto block text-white font-semibold text-base py-4 rounded-lg active:scale-[0.98] transition-all duration-200 ${
+          className={`w-full max-w-xl mx-auto block text-white font-bold text-lg py-5 rounded-2xl active:scale-[0.98] transition-all duration-200 shadow-xl shadow-[#111827]/20 border border-gray-800 ${
             canProceed
-              ? 'bg-black hover:bg-[#1f2937]'
-              : 'bg-[#ccc] cursor-not-allowed'
+              ? 'bg-[#111827] hover:bg-black'
+              : 'bg-gray-300 cursor-not-allowed border-gray-300 shadow-none'
           }`}
         >
           {isLastQuestion ? 'Complete' : 'Continue'}

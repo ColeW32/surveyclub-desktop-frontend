@@ -1,33 +1,29 @@
 import React, { useState } from 'react';
-import { Bug } from 'lucide-react';
+import { Bug, UserPlus, UserCheck } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 
 const LoginScreen: React.FC = () => {
-  const { setIsAuthenticated } = useUser();
+  const { loginAsNewUser, loginAsExistingUser } = useUser();
   const [error, setError] = useState<string | null>(null);
   const [isSigningIn, setIsSigningIn] = useState(false);
 
   const handleGoogleSignIn = async () => {
     setIsSigningIn(true);
-    // Mock login delay
+    // Mock login delay — real auth will determine new vs existing
     setTimeout(() => {
-      setIsAuthenticated(true);
+      loginAsExistingUser();
       setIsSigningIn(false);
     }, 1000);
   };
 
   const handleAppleSignIn = async () => {
     setIsSigningIn(true);
-    // Mock login delay
+    // Mock login delay — real auth will determine new vs existing
     setTimeout(() => {
-      setIsAuthenticated(true);
+      loginAsExistingUser();
       setIsSigningIn(false);
     }, 1000);
   };
-
-  const loginAsDebugUser = () => {
-      setIsAuthenticated(true);
-  }
 
   return (
     <div className="flex h-screen bg-[#0a0a0a] text-white overflow-hidden relative selection:bg-[#c9ff3a] selection:text-black">
@@ -99,14 +95,23 @@ const LoginScreen: React.FC = () => {
             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
           </div>
 
-          {/* Debug Bypass */}
-          <button
-            onClick={loginAsDebugUser}
-            className="w-full flex items-center justify-center space-x-3 px-6 py-4 bg-gray-800/50 border border-gray-700/50 text-gray-300 rounded-2xl text-sm font-semibold hover:bg-gray-800 hover:text-white hover:border-gray-600 transition-all duration-200 group"
-          >
-            <Bug size={18} className="group-hover:text-[#c9ff3a] transition-colors" />
-            <span>Quick Debug Access</span>
-          </button>
+          {/* Debug Bypass — Two Options */}
+          <div className="space-y-2.5">
+            <button
+              onClick={loginAsNewUser}
+              className="w-full flex items-center justify-center space-x-3 px-6 py-4 bg-gray-800/50 border border-gray-700/50 text-gray-300 rounded-2xl text-sm font-semibold hover:bg-gray-800 hover:text-white hover:border-gray-600 transition-all duration-200 group"
+            >
+              <UserPlus size={18} className="group-hover:text-[#c9ff3a] transition-colors" />
+              <span>Bypass New Account</span>
+            </button>
+            <button
+              onClick={loginAsExistingUser}
+              className="w-full flex items-center justify-center space-x-3 px-6 py-4 bg-gray-800/50 border border-gray-700/50 text-gray-300 rounded-2xl text-sm font-semibold hover:bg-gray-800 hover:text-white hover:border-gray-600 transition-all duration-200 group"
+            >
+              <UserCheck size={18} className="group-hover:text-[#c9ff3a] transition-colors" />
+              <span>Bypass Existing Account</span>
+            </button>
+          </div>
           <p className="text-[11px] text-gray-600 text-center mt-3">Bypasses authentication for testing purposes</p>
         </div>
       </div>

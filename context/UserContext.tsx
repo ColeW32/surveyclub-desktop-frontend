@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 
 interface UserContextType {
   balance: number;
@@ -15,6 +15,9 @@ interface UserContextType {
   setHasCompletedWelcomeSurvey: (v: boolean) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (v: boolean) => void;
+  signOut: () => void;
+  loginAsNewUser: () => void;
+  loginAsExistingUser: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -23,10 +26,36 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [balance, setBalance] = useState<number>(21.99);
   const [isPremium, setIsPremium] = useState<boolean>(true);
   const [isFirstCashout, setIsFirstCashout] = useState<boolean>(true);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
   const [hasCompletedWelcomeSurvey, setHasCompletedWelcomeSurvey] = useState<boolean>(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
+
+  const signOut = useCallback(() => {
+    setIsAuthenticated(false);
+    setHasCompletedOnboarding(false);
+    setHasCompletedWelcomeSurvey(false);
+    setShowWelcomeModal(false);
+    setBalance(21.99);
+    setIsPremium(true);
+    setIsFirstCashout(true);
+  }, []);
+
+  const loginAsNewUser = useCallback(() => {
+    setIsAuthenticated(true);
+    setHasCompletedOnboarding(false);
+    setHasCompletedWelcomeSurvey(false);
+    setShowWelcomeModal(false);
+    setBalance(0);
+  }, []);
+
+  const loginAsExistingUser = useCallback(() => {
+    setIsAuthenticated(true);
+    setHasCompletedOnboarding(true);
+    setHasCompletedWelcomeSurvey(true);
+    setShowWelcomeModal(false);
+    setBalance(21.99);
+  }, []);
 
   return (
     <UserContext.Provider value={{
@@ -44,6 +73,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setHasCompletedWelcomeSurvey,
       showWelcomeModal,
       setShowWelcomeModal,
+      signOut,
+      loginAsNewUser,
+      loginAsExistingUser,
     }}>
       {children}
     </UserContext.Provider>

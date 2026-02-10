@@ -125,9 +125,15 @@ const OnboardingScreen: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white">
+    <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-[#c9ff3a]/10 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px]" />
+      </div>
+
       {/* Header with back + progress */}
-      <header className="flex items-center px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-2 h-14 sm:h-16">
+      <header className="relative z-10 flex items-center px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-4 h-20">
         {slide.showBack ? (
           <button
             onClick={prevSlide}
@@ -153,19 +159,21 @@ const OnboardingScreen: React.FC = () => {
       </header>
 
       {/* Content */}
-      <div className="flex-1 flex items-center justify-center overflow-y-auto px-4 sm:px-6 py-4">
-        <div className={`w-full max-w-lg transition-opacity duration-200 ${fadeClass}`}>
+      <div className="relative z-10 flex-1 flex items-center justify-center overflow-y-auto px-4 sm:px-6 py-4">
+        <div className={`w-full max-w-xl transition-all duration-500 ease-out transform ${
+          fadeClass === 'opacity-100' ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+        }`}>
           <div className="flex flex-col items-center">
             {/* Title */}
-            <h1 className="text-2xl sm:text-3xl lg:text-[26px] font-extrabold text-center text-[#111827] mb-3 sm:mb-4">
+            <h1 className="text-3xl sm:text-4xl font-black text-center text-[#111827] mb-3 sm:mb-4 tracking-tight">
               {slide.title}
             </h1>
             {slide.subtitle && (
-              <p className="text-sm sm:text-base font-semibold text-gray-500 mb-3">{slide.subtitle}</p>
+              <p className="text-base sm:text-lg font-medium text-gray-500 mb-6">{slide.subtitle}</p>
             )}
 
             {/* Illustration */}
-            <div className="w-full mb-4 sm:mb-5">
+            <div className="w-full mb-8 sm:mb-10 transform hover:scale-[1.02] transition-transform duration-500">
               {renderIllustration()}
             </div>
 
@@ -212,10 +220,10 @@ const OnboardingScreen: React.FC = () => {
       </div>
 
       {/* Bottom button */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-3 pb-6 sm:pb-8">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 pt-3 pb-8 sm:pb-10">
         <button
           onClick={nextSlide}
-          className="w-full max-w-lg mx-auto block bg-[#111827] text-white font-semibold text-base py-4 rounded-2xl hover:bg-[#1f2937] active:scale-[0.98] transition-all duration-200 shadow-lg shadow-[#111827]/20"
+          className="w-full max-w-xl mx-auto block bg-[#111827] hover:bg-black text-white font-bold text-lg py-5 rounded-2xl active:scale-[0.98] transition-all duration-200 shadow-xl shadow-[#111827]/20 border border-gray-800"
         >
           {isLastSlide ? 'Continue for Free' : 'Continue'}
         </button>
