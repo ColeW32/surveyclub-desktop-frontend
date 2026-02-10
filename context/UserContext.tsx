@@ -9,6 +9,12 @@ interface UserContextType {
   setIsFirstCashout: (isFirstCashout: boolean) => void;
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
+  hasCompletedOnboarding: boolean;
+  setHasCompletedOnboarding: (v: boolean) => void;
+  hasCompletedWelcomeSurvey: boolean;
+  setHasCompletedWelcomeSurvey: (v: boolean) => void;
+  showWelcomeModal: boolean;
+  setShowWelcomeModal: (v: boolean) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -18,6 +24,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isPremium, setIsPremium] = useState<boolean>(true);
   const [isFirstCashout, setIsFirstCashout] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
+  const [hasCompletedWelcomeSurvey, setHasCompletedWelcomeSurvey] = useState<boolean>(false);
+  const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
 
   return (
     <UserContext.Provider value={{
@@ -28,7 +37,13 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       isFirstCashout,
       setIsFirstCashout,
       isAuthenticated,
-      setIsAuthenticated
+      setIsAuthenticated,
+      hasCompletedOnboarding,
+      setHasCompletedOnboarding,
+      hasCompletedWelcomeSurvey,
+      setHasCompletedWelcomeSurvey,
+      showWelcomeModal,
+      setShowWelcomeModal,
     }}>
       {children}
     </UserContext.Provider>

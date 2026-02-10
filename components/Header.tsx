@@ -2,8 +2,13 @@
 import React from 'react';
 import { Bell, User, Search, ArrowUpRight } from 'lucide-react';
 import { useUser } from '../context/UserContext';
+import { NavItem } from '../types';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onNavigate?: (tab: NavItem) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const { balance } = useUser();
 
   return (
@@ -15,7 +20,10 @@ const Header: React.FC = () => {
                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-500 mb-1">Wallet Balance</span>
                 <div className="flex items-center space-x-4">
                   <span className="text-3xl font-black text-white tracking-tighter">${balance.toFixed(2)}</span>
-                  <button className="flex items-center space-x-1.5 px-3 py-1.5 bg-[#c9ff3a] text-black text-[10px] font-black uppercase rounded-lg hover:bg-[#b8eb32] transition-colors shadow-lg shadow-[#c9ff3a]/10">
+                  <button 
+                    onClick={() => onNavigate?.(NavItem.Withdraw)}
+                    className="flex items-center space-x-1.5 px-3 py-1.5 bg-[#c9ff3a] text-black text-[10px] font-black uppercase rounded-lg hover:bg-[#b8eb32] transition-colors shadow-lg shadow-[#c9ff3a]/10"
+                  >
                     <span>Withdraw</span>
                     <ArrowUpRight size={12} strokeWidth={3} />
                   </button>
