@@ -23,10 +23,10 @@ export const COLORS = {
 
 export const NAVIGATION_ITEMS = [
   { id: NavItem.EarnCash, label: 'Earn Cash', icon: <Zap size={20} /> },
-  { id: NavItem.Surveys, label: 'Daily Surveys', icon: <ClipboardList size={20} /> },
-  { id: NavItem.Offers, label: 'Offer Walls', icon: <Tag size={20} /> },
-  { id: NavItem.Games, label: 'Play to Earn', icon: <Gamepad2 size={20} /> },
   { id: NavItem.MyGames, label: 'My Games', icon: <PlayCircle size={20} /> },
+  { id: NavItem.Surveys, label: 'Daily Surveys', icon: <ClipboardList size={20} /> },
+  { id: NavItem.Games, label: 'Play to Earn', icon: <Gamepad2 size={20} /> },
+  { id: NavItem.Offers, label: 'Offer Walls', icon: <Tag size={20} /> },
   { id: NavItem.History, label: 'Earning History', icon: <History size={20} /> },
   { id: NavItem.Withdraw, label: 'Withdraw Cash', icon: <Wallet size={20} /> },
   { id: NavItem.Debug, label: 'Debug Settings', icon: <Settings size={20} /> },
