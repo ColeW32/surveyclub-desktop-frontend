@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ChevronDown, Award, Info, AlertCircle } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Info, AlertCircle } from 'lucide-react';
 import WELCOME_SURVEY_QUESTIONS, { SurveyOption } from '../constants/welcomeSurveyQuestions';
 import { useUser } from '../context/UserContext';
 
-const WelcomeSurveyQuiz: React.FC = () => {
+interface WelcomeSurveyQuizProps {
+  onComplete: () => void;
+}
+
+const WelcomeSurveyQuiz: React.FC<WelcomeSurveyQuizProps> = ({ onComplete }) => {
   const { setHasCompletedWelcomeSurvey, setBalance, balance } = useUser();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -11,7 +15,6 @@ const WelcomeSurveyQuiz: React.FC = () => {
   const [textInputValue, setTextInputValue] = useState('');
   const [yearValue, setYearValue] = useState('');
   const [fadeClass, setFadeClass] = useState('opacity-100');
-  const [showCompletion, setShowCompletion] = useState(false);
   const [responses, setResponses] = useState<Record<number, string>>({});
 
   const question = WELCOME_SURVEY_QUESTIONS[currentIndex];
@@ -59,7 +62,10 @@ const WelcomeSurveyQuiz: React.FC = () => {
     setResponses((prev) => ({ ...prev, [currentIndex]: answer }));
 
     if (isLastQuestion) {
-      setShowCompletion(true);
+      // Credit reward and mark complete — App.tsx will show the success modal on dashboard
+      setBalance(balance + 0.25);
+      setHasCompletedWelcomeSurvey(true);
+      onComplete();
       return;
     }
 
@@ -83,11 +89,6 @@ const WelcomeSurveyQuiz: React.FC = () => {
     });
   };
 
-  const handleComplete = () => {
-    setBalance(balance + 0.25);
-    setHasCompletedWelcomeSurvey(true);
-  };
-
   // Button enabled logic matching mobile:
   // For select questions with correct answers in first 3 Qs, must be correct to proceed
   const canProceed = (() => {
@@ -108,42 +109,6 @@ const WelcomeSurveyQuiz: React.FC = () => {
     }
     return question.question;
   };
-
-  // Completion screen
-  if (showCompletion) {
-    return (
-      <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white relative overflow-hidden items-center justify-center px-4">
-        {/* Background decoration */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[100px]" />
-          <div className="absolute bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px]" />
-          {/* Confetti-like dots */}
-          <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-yellow-400/30 animate-pulse" />
-          <div className="absolute top-1/3 right-1/4 w-4 h-4 rounded-full bg-purple-400/30 animate-pulse delay-700" />
-          <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-pink-400/30 animate-pulse delay-300" />
-        </div>
-
-        <div className="relative z-10 w-full max-w-md text-center animate-in zoom-in-50 duration-500">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-tr from-[#00BE9D] to-[#00D4AF] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-[#00BE9D]/30 ring-4 ring-white">
-            <Award size={48} className="text-white" />
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#111827] mb-4 tracking-tight">Survey Complete!</h2>
-          <p className="text-lg sm:text-xl text-gray-500 font-medium mb-2">You just earned</p>
-          <div className="relative inline-block mb-8">
-            <p className="text-6xl sm:text-7xl font-black text-[#00BE9D] tracking-tighter">$0.25</p>
-            <div className="absolute -top-2 -right-6 text-2xl animate-bounce">🎉</div>
-          </div>
-          <p className="text-base text-gray-500 mb-10 max-w-xs mx-auto leading-relaxed">Your balance has been updated. Let's start earning more!</p>
-          <button
-            onClick={handleComplete}
-            className="w-full bg-[#111827] hover:bg-black text-white font-bold text-lg py-5 rounded-2xl shadow-xl shadow-[#111827]/20 hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-gray-800"
-          >
-            Start Earning
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col h-screen bg-[#F6F7F8] selection:bg-[#00BE9D] selection:text-white relative overflow-hidden">

@@ -15,6 +15,8 @@ interface UserContextType {
   setHasCompletedWelcomeSurvey: (v: boolean) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (v: boolean) => void;
+  showPremiumModal: boolean;
+  setShowPremiumModal: (v: boolean) => void;
   signOut: () => void;
   loginAsNewUser: () => void;
   loginAsExistingUser: () => void;
@@ -73,6 +75,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setHasCompletedWelcomeSurvey,
       showWelcomeModal,
       setShowWelcomeModal,
+      showPremiumModal,
+      setShowPremiumModal,
       signOut,
       loginAsNewUser,
       loginAsExistingUser,

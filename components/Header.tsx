@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
-  const { balance, isPremium } = useUser();
+  const { balance, isPremium, setShowPremiumModal } = useUser();
 
   return (
     <header className="bg-[#0a0a0a] text-white w-full border-b border-gray-800/20">
@@ -51,7 +51,12 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                   {isPremium ? (
                     <p className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none">Premium</p>
                   ) : (
-                    <button className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none underline hover:text-white transition-colors">Free Plan</button>
+                    <button 
+                      onClick={() => setShowPremiumModal(true)}
+                      className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none underline hover:text-white transition-colors"
+                    >
+                      Free Plan
+                    </button>
                   )}
                 </div>
                 <div className="w-9 h-9 rounded-xl bg-gray-800 flex items-center justify-center border border-gray-700 overflow-hidden group-hover:border-[#c9ff3a]/50 transition-colors">

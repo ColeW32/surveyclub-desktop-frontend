@@ -64,7 +64,6 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
       'Google Search',
     ],
     correctAnswer: null,
-    explanation: "That's right! Survey Clubs pays out over 3x more on average vs. other apps.",
   },
   {
     type: 'select',
@@ -77,7 +76,6 @@ const WELCOME_SURVEY_QUESTIONS: WelcomeSurveyQuestion[] = [
       'All of the above and 6 additional giftcards',
     ],
     correctAnswer: null,
-    explanation: 'Cash out your way with Survey Club!',
   },
   {
     type: 'select',

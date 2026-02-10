@@ -12,6 +12,7 @@ import DailySurveys from './components/DailySurveys';
 import OnboardingScreen from './components/OnboardingScreen';
 import WelcomeModal from './components/WelcomeModal';
 import WelcomeSurveyQuiz from './components/WelcomeSurveyQuiz';
+import PremiumModal from './components/PremiumModal';
 import { NavItem } from './types';
 
 const MainContent: React.FC = () => {
@@ -24,6 +25,7 @@ const MainContent: React.FC = () => {
   } = useUser();
   const [activeTab, setActiveTab] = useState<NavItem>(NavItem.EarnCash);
   const [showWelcomeSurvey, setShowWelcomeSurvey] = useState(false);
+  const [showSurveySuccessModal, setShowSurveySuccessModal] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Reset scroll position when tab changes
@@ -45,7 +47,10 @@ const MainContent: React.FC = () => {
 
   // 3. Doing the welcome survey quiz
   if (showWelcomeSurvey) {
-    return <WelcomeSurveyQuiz />;
+    return <WelcomeSurveyQuiz onComplete={() => {
+      setShowWelcomeSurvey(false);
+      setShowSurveySuccessModal(true);
+    }} />;
   }
 
   // 4. Main app
@@ -60,6 +65,29 @@ const MainContent: React.FC = () => {
           }}
           onClose={() => setShowWelcomeModal(false)}
         />
+      )}
+
+      {/* Premium Modal overlay */}
+      {showPremiumModal && (
+        <PremiumModal onClose={() => setShowPremiumModal(false)} />
+      )}
+
+      {/* Survey completion success modal — matches mobile DynamicModal */}
+      {showSurveySuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 animate-in fade-in duration-300">
+          <div className="bg-white rounded-3xl p-6 w-[90%] max-w-sm text-center">
+            <p className="text-5xl font-bold text-[#25272B] mb-8">+$0.25</p>
+            <p className="text-[15px] text-[#25272B] mb-8 text-center">
+              Nice work! You've earned $0.25 and the cash is in your Survey Club account!
+            </p>
+            <button
+              onClick={() => setShowSurveySuccessModal(false)}
+              className="w-[95%] py-3.5 bg-[#C2EA69] rounded-[10px] text-[#25272B] font-bold text-base hover:bg-[#b5dd5c] active:scale-[0.98] transition-all duration-200"
+            >
+              Explore Survey Club
+            </button>
+          </div>
+        </div>
       )}
 
       <div className="flex h-screen bg-[#0a0a0a] text-white overflow-hidden">
