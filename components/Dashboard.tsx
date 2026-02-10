@@ -4,7 +4,7 @@ import OfferCard from './OfferCard';
 import MissionsWidget from './MissionsWidget';
 import SurveyTile from './SurveyTile';
 import FeaturedOffer from './FeaturedOffer';
-import { MOCK_OFFERS, MOCK_SURVEYS } from '../constants';
+import { MOCK_OFFERS, MOCK_SURVEYS } from '../appConstants';
 
 const Dashboard: React.FC = () => {
   return (

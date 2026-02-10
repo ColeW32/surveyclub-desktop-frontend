@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Flame, Zap, PlusCircle, Filter } from 'lucide-react';
 import SurveyTile from './SurveyTile';
-import { MOCK_SURVEYS } from '../constants';
+import { MOCK_SURVEYS } from '../appConstants';
 import { Survey } from '../types';
 
 // Generate 20 mock surveys based on the original 6 for the demo

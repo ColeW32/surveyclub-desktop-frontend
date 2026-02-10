@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MOCK_MY_GAMES } from '../constants';
+import { MOCK_MY_GAMES } from '../appConstants';
 import { ArrowRight } from 'lucide-react';
 
 const MyGames: React.FC = () => {

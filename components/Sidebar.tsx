@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Apple, Smartphone } from 'lucide-react';
 import { NavItem } from '../types';
-import { NAVIGATION_ITEMS } from '../constants';
+import { NAVIGATION_ITEMS } from '../appConstants';
 
 interface SidebarProps {
   activeItem: NavItem;
