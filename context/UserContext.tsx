@@ -1,4 +1,3 @@
-// Force redeployment
 import React, { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 
 interface UserContextType {
@@ -16,8 +15,6 @@ interface UserContextType {
   setHasCompletedWelcomeSurvey: (v: boolean) => void;
   showWelcomeModal: boolean;
   setShowWelcomeModal: (v: boolean) => void;
-  showPremiumModal: boolean;
-  setShowPremiumModal: (v: boolean) => void;
   signOut: () => void;
   loginAsNewUser: () => void;
   loginAsExistingUser: () => void;
@@ -33,14 +30,12 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState<boolean>(false);
   const [hasCompletedWelcomeSurvey, setHasCompletedWelcomeSurvey] = useState<boolean>(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState<boolean>(false);
-  const [showPremiumModal, setShowPremiumModal] = useState<boolean>(false);
 
   const signOut = useCallback(() => {
     setIsAuthenticated(false);
     setHasCompletedOnboarding(false);
     setHasCompletedWelcomeSurvey(false);
     setShowWelcomeModal(false);
-    setShowPremiumModal(false);
     setBalance(21.99);
     setIsPremium(true);
     setIsFirstCashout(true);
@@ -51,7 +46,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setHasCompletedOnboarding(false);
     setHasCompletedWelcomeSurvey(false);
     setShowWelcomeModal(false);
-    setShowPremiumModal(false);
     setBalance(0);
   }, []);
 
@@ -60,7 +54,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setHasCompletedOnboarding(true);
     setHasCompletedWelcomeSurvey(true);
     setShowWelcomeModal(false);
-    setShowPremiumModal(false);
     setBalance(21.99);
   }, []);
 
@@ -80,8 +73,6 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setHasCompletedWelcomeSurvey,
       showWelcomeModal,
       setShowWelcomeModal,
-      showPremiumModal,
-      setShowPremiumModal,
       signOut,
       loginAsNewUser,
       loginAsExistingUser,

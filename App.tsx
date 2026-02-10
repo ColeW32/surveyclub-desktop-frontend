@@ -26,6 +26,7 @@ const MainContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<NavItem>(NavItem.EarnCash);
   const [showWelcomeSurvey, setShowWelcomeSurvey] = useState(false);
   const [showSurveySuccessModal, setShowSurveySuccessModal] = useState(false);
+  const [showPremiumModal, setShowPremiumModal] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Reset scroll position when tab changes
@@ -96,7 +97,7 @@ const MainContent: React.FC = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 relative">
-        <Header onNavigate={setActiveTab} />
+        <Header onNavigate={setActiveTab} onOpenPremiumModal={() => setShowPremiumModal(true)} />
 
         {/* Content Canvas (The "Inner Section") */}
           <main className="flex-1 px-6 pb-6 min-h-0">

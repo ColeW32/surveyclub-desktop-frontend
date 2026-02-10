@@ -6,10 +6,11 @@ import { NavItem } from '../types';
 
 interface HeaderProps {
   onNavigate?: (tab: NavItem) => void;
+  onOpenPremiumModal?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
-  const { balance, isPremium, setShowPremiumModal } = useUser();
+const Header: React.FC<HeaderProps> = ({ onNavigate, onOpenPremiumModal }) => {
+  const { balance, isPremium } = useUser();
 
   return (
     <header className="bg-[#0a0a0a] text-white w-full border-b border-gray-800/20">
@@ -52,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                     <p className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none">Premium</p>
                   ) : (
                     <button 
-                      onClick={() => setShowPremiumModal(true)}
+                      onClick={() => onOpenPremiumModal?.()}
                       className="text-[8px] font-bold text-gray-500 uppercase tracking-widest leading-none underline hover:text-white transition-colors"
                     >
                       Free Plan
