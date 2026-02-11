@@ -1,7 +1,6 @@
 
 export enum NavItem {
   EarnCash = 'EarnCash',
-  MyGames = 'MyGames',
   Surveys = 'Surveys',
   Offers = 'Offers',
   Games = 'Games',

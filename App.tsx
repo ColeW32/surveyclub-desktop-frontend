@@ -3,7 +3,6 @@ import { UserProvider, useUser } from './context/UserContext';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
-import MyGames from './components/MyGames';
 import WithdrawCash from './components/WithdrawCash';
 import EarningsHistory from './components/EarningsHistory';
 import DebugSettings from './components/DebugSettings';
@@ -107,11 +106,10 @@ const MainContent: React.FC = () => {
             >
               {activeTab === NavItem.EarnCash && <Dashboard />}
               {activeTab === NavItem.Surveys && <DailySurveys />}
-              {activeTab === NavItem.MyGames && <MyGames />}
               {activeTab === NavItem.Withdraw && <WithdrawCash />}
               {activeTab === NavItem.History && <EarningsHistory />}
               {activeTab === NavItem.Debug && <DebugSettings />}
-              {![NavItem.EarnCash, NavItem.Surveys, NavItem.MyGames, NavItem.Withdraw, NavItem.History, NavItem.Debug].includes(activeTab) && (
+              {![NavItem.EarnCash, NavItem.Surveys, NavItem.Withdraw, NavItem.History, NavItem.Debug].includes(activeTab) && (
                 <div className="flex flex-col items-center justify-center h-full space-y-4">
                   <div className="w-16 h-16 bg-[#c9ff3a] rounded-full animate-pulse flex items-center justify-center">
                       <div className="w-8 h-8 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
